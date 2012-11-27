@@ -17,6 +17,8 @@ call vundle#rc()
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 
+let NERDTreeIgnore = ['\.pyc$']
+
 " VCS
 Bundle 'tpope/vim-fugitive'
 
