@@ -1,20 +1,21 @@
 set encoding=utf-8
 set nocompatible               " be iMproved
-filetype off                   " required!
+filetype on
+filetype plugin on
 set rtp+=~/.vim/bundle/vundle/
 
 call vundle#rc()
 
-" let Vundle manage Vundle
-Bundle 'gmarik/vundle'
 
 " Vundle help
-""""""""""""""
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install(update) bundles
-" :BundleSearch(!) foo - search(or refresh cache first) for foo
-" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+" " """""""""""
+" " :BundleList          - list configured bundles
+" " :BundleInstall(!)    - install(update) bundles
+" " :BundleSearch(!) foo - search(or refresh cache first) for foo
+" " :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
 
+" let Vundle manage Vundle
+Bundle 'gmarik/vundle'
 
 " VCS
 Bundle 'tpope/vim-fugitive'
@@ -25,7 +26,6 @@ Bundle 'majutsushi/tagbar'
 Bundle 'mileszs/ack.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-surround'
-Bundle 'scrooloose/syntastic'
 Bundle 'ervandew/supertab'
 Bundle 'Raimondi/delimitMate'
 Bundle 'sophacles/vim-bundle-sparkup'
@@ -37,11 +37,11 @@ Bundle 'rodjek/vim-puppet'
 Bundle 'groenewege/vim-less'
 
 " Python bundles
-Bundle 'kevinw/pyflakes-vim'
 Bundle 'fs111/pydoc.vim'
-Bundle 'vim-scripts/pep8'
+Bundle 'nvie/vim-flake8'
 Bundle 'atourino/jinja.vim'
 Bundle 'vim-scripts/python_match.vim'
+Bundle 'scrooloose/syntastic'
 
 " Ruby specific
 Bundle "vim-ruby/vim-ruby"
@@ -49,17 +49,12 @@ Bundle 'tpope/vim-endwise'
 
 " Fun, but not useful
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'skammer/vim-css-color'
 Bundle 'mgutz/vim-colors'
+Bundle 'skammer/vim-css-color'
 Bundle 'ehamberg/vim-cute-python'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'Gundo'
-Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
-Bundle 'honza/snipmate-snippets'
-Bundle 'garbas/vim-snipmate'
-Bundle 'mattn/gist-vim'
-Bundle 'mattn/webapi-vim'
 Bundle 'editorconfig/editorconfig-vim'
 Bundle 'ctrlp.vim'
 
@@ -151,6 +146,9 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 nnoremap / /\v
 vnoremap / /\v
 
+autocmd FileType python map <buffer> <F3> :call Flake8()<CR>
+let g:flake8_ignore="E501,W293"
+
 
 " General auto-commands
 """""""""""""""""""""""
@@ -226,8 +224,8 @@ cmap w!! w !sudo tee % >/dev/null
 
 
 " Plugin configurations
-""""""""""""""""""""""""
-
+"""""""""""""""""""""""         "
+let g:pep8_map= '+'
 " TagBar
 nnoremap <silent> <F2> :TagbarToggle<CR>
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
@@ -235,6 +233,7 @@ let g:tagbar_autoshowtag = 1
 
 " NERDTree
 nnoremap <Leader>g :NERDTreeToggle<CR>
+let NERDTreeIgnore = ['\.pyc$']
 
 " Sparkup
 let g:sparkupExecuteMapping = '<c-y>'
