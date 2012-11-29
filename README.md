@@ -1,8 +1,7 @@
-# Manifests for Puppet
-## To run on Vagrant
+# Dotfiles! 
 
-need to load Bundle for .vimrc to work
+Symlink into ~/.
 ```sh
-git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+$ ln -s /path/to/checkout/.vimrc /Users/*you*/.vimrc
+$ source ~/.vimrc
 ```
-[Vundle](https://github.com/gmarik/vundle)
