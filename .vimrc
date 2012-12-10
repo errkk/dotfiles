@@ -60,6 +60,7 @@ Bundle 'ctrlp.vim'
 
 filetype plugin indent on
 let NERDTreeIgnore = ['\.pyc$']
+let g:cssColorVimDoNotMessMyUpdatetime = 1
 
 " Configurations
 """"""""""""""""
