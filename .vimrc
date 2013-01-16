@@ -2,7 +2,7 @@ set encoding=utf-8
 set nocompatible               " be iMproved
 filetype off
 set rtp+=~/.vim/bundle/vundle/
-
+set mouse=a
 call vundle#rc()
 
 
@@ -15,6 +15,8 @@ call vundle#rc()
 
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
+
+let NERDTreeIgnore = ['\.pyc$']
 
 " VCS
 Bundle 'tpope/vim-fugitive'
@@ -60,7 +62,7 @@ Bundle 'ctrlp.vim'
 
 filetype plugin indent on
 let NERDTreeIgnore = ['\.pyc$']
-let g:cssColorVimDoNotMessMyUpdatetime = 1
+let g:cssColorVimDoNotMessMyUpdatetime = 0
 
 " Configurations
 """"""""""""""""
@@ -89,7 +91,6 @@ au TabLeave * silent! :wa
 " Resize splits when the window is resized
 au VimResized * exe "normal! \<c-w>="
 
-autocmd FileType html, xhtml set ft=html.html " For SnipMate
 au BufRead,BufNewFile *.html set filetype=html.html
 
 " Colours
