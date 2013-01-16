@@ -37,6 +37,7 @@ Bundle 'leshill/vim-json'
 Bundle 'rodjek/vim-puppet'
 Bundle 'skammer/vim-css-color'
 Bundle 'groenewege/vim-less'
+Bundle 'saltstack/salt-vim'
 
 " Python bundles
 Bundle 'fs111/pydoc.vim'
