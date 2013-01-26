@@ -31,6 +31,7 @@ Bundle 'ervandew/supertab'
 Bundle 'Raimondi/delimitMate'
 Bundle 'sophacles/vim-bundle-sparkup'
 Bundle 'corntrace/bufexplorer'
+Bundle 'goldfeld/vim-seek'
 
 " Syntaxes and such.
 Bundle 'leshill/vim-json'
