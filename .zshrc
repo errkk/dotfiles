@@ -5,7 +5,8 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="blinks"
+#ZSH_THEME="blinks"
+ZSH_THEME="pygmalion"
 
 DISABLE_AUTO_TITLE=true
 
@@ -27,3 +28,5 @@ source $ZSH/oh-my-zsh.sh
 export PATH=/usr/local/heroku/bin:/usr/local/Cellar/ruby/1.9.3-p0/bin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/opt/local/sbin:/usr/local:/usr/local/sbin/:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/git/bin:$HOME/bin
 source ~/.salt-poke/tools/update_check.sh
 alias rs="django-admin.py runserver 0.0.0.0:9000"
+alias gs="git status"
+pr() {hub pull-request -b pokelondon:develop -h pokelondon:feature/issue-"$1" -i "$1" }

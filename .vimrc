@@ -20,6 +20,7 @@ let NERDTreeIgnore = ['\.pyc$']
 
 " VCS
 Bundle 'tpope/vim-fugitive'
+Bundle 'airblade/vim-gitgutter'
 
 " System
 Bundle 'scrooloose/nerdtree'
@@ -216,7 +217,9 @@ autocmd BufWritePre *.less :%s/\s\+$//e
 
 " Genral
 noremap <silent> <F3> :QFix<CR>
-
+:nmap <C-n> :bnext<CR>
+:nmap <C-p> :bprev<CR>
+:nmap ; :CtrlPBuffer<CR>
 
 " Change leader
 let mapleader = ","
