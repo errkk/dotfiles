@@ -153,6 +153,15 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 nnoremap / /\v
 vnoremap / /\v
 
+" Preserve indentation while pasting text from the OS X clipboard
+noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
+
+" :W should save as well
+command W w
+
+" Copy visual selection
+vmap <C-c> "*y
+
 autocmd FileType python map <buffer> <F3> :call Flake8()<CR>
 let g:flake8_ignore="E501,W293"
 
@@ -270,7 +279,9 @@ map <leader>gb :Gblame<CR>
 map <leader>gd :Gdiff<CR>
 map <leader>ge :Gedit<CR>
 
-let g:Powerline_symbols = 'fancy'
+if has('gui_running')
+    let g:Powerline_symbols = 'fancy'
+endif
 
 autocmd VimEnter * NERDTree
 let NERDTreeShowBookmarks=1

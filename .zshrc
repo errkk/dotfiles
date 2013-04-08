@@ -6,7 +6,7 @@ ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="blinks"
-ZSH_THEME="pygmalion"
+ZSH_THEME="eric"
 
 DISABLE_AUTO_TITLE=true
 
