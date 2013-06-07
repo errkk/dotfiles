@@ -40,6 +40,8 @@ Bundle 'rodjek/vim-puppet'
 Bundle 'skammer/vim-css-color'
 Bundle 'groenewege/vim-less'
 Bundle 'saltstack/salt-vim'
+Bundle 'marijnh/tern_for_vim'
+Bundle 'davidhalter/jedi-vim'
 
 " Python bundles
 Bundle 'fs111/pydoc.vim'
