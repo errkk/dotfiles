@@ -41,6 +41,7 @@ Bundle 'skammer/vim-css-color'
 Bundle 'groenewege/vim-less'
 Bundle 'saltstack/salt-vim'
 Bundle 'davidhalter/jedi-vim'
+Bundle 'editorconfig/editorconfig-vim'
 
 " Python bundles
 Bundle 'fs111/pydoc.vim'
