@@ -40,7 +40,6 @@ Bundle 'rodjek/vim-puppet'
 Bundle 'skammer/vim-css-color'
 Bundle 'groenewege/vim-less'
 Bundle 'saltstack/salt-vim'
-Bundle 'marijnh/tern_for_vim'
 Bundle 'davidhalter/jedi-vim'
 
 " Python bundles
@@ -212,11 +211,11 @@ au BufNewFile,BufReadPost *.js setlocal shiftwidth=4 tabstop=4 expandtab
 au BufNewFile,BufReadPost *.html.jinja setlocal filetype=htmljinja
 
 " Make sure we hilight extra whitespace in the most annoying way possible.
-"highlight ExtraWhitespace ctermbg=red guibg=red
-"match ExtraWhitespace /\s\+$/
-"autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-"autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-"autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 
 autocmd BufWritePre *.js :%s/\s\+$//e
 autocmd BufWritePre *.html :%s/\s\+$//e
