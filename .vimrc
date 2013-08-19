@@ -62,6 +62,7 @@ Bundle 'Gundo'
 Bundle 'tomtom/tlib_vim'
 Bundle 'editorconfig/editorconfig-vim'
 Bundle 'ctrlp.vim'
+Bundle 'Lokaltog/vim-easymotion'
 
 
 filetype plugin indent on
@@ -245,6 +246,7 @@ cmap w!! w !sudo tee % >/dev/null
 " Plugin configurations
 """""""""""""""""""""""         "
 let g:pep8_map= '+'
+
 " TagBar
 nnoremap <silent> <F2> :TagbarToggle<CR>
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
@@ -258,8 +260,9 @@ let NERDTreeIgnore = ['\.pyc$']
 let g:sparkupExecuteMapping = '<c-y>'
 let g:sparkupNextMapping = '<c-k>'
 
-
+" Status Line
 set laststatus=2
+set statusline=%F%m%r%h%w\ (%{&ff}){%Y}\ [%l,%v][%p%%]
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_jump=0
 
@@ -283,6 +286,11 @@ map <leader>ge :Gedit<CR>
 if has('gui_running')
     let g:Powerline_symbols = 'fancy'
 endif
+
+" <space>w to jump to any word,
+" <space>f to jump to an occurence of a letter
+" <space>j to jump to any line
+let g:EasyMotion_leader_key = '<Space>'
 
 autocmd VimEnter * NERDTree
 let NERDTreeShowBookmarks=1
