@@ -16,7 +16,6 @@ call vundle#rc()
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 
-let NERDTreeIgnore = ['\.pyc$']
 
 " VCS
 Bundle 'tpope/vim-fugitive'
@@ -67,7 +66,6 @@ Bundle 'Lokaltog/vim-easymotion'
 
 
 filetype plugin indent on
-let NERDTreeIgnore = ['\.pyc$']
 let g:cssColorVimDoNotMessMyUpdatetime = 0
 
 " Configurations
@@ -140,7 +138,7 @@ set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
 set smarttab      " insert tabs on the start of a line according to
                   "    shiftwidth, not tabstop
 set autoindent    " always set autoindenting on
-set copyindent    " copy the previous indentation on autoindenting
+    " copy the previous indentation on autoindenting
 
 " General Code Folding
 """"""""""""""""""""""
@@ -230,7 +228,6 @@ autocmd BufWritePre *.less :%s/\s\+$//e
 " Genral
 noremap <silent> <F3> :QFix<CR>
 :nmap <C-n> :bnext<CR>
-:nmap <C-p> :bprev<CR>
 :nmap ; :CtrlPBuffer<CR>
 
 " Change leader
@@ -269,14 +266,18 @@ let g:syntastic_auto_jump=0
 
 let &t_Co=256
 
+" Show all open buffers
 noremap <leader>b :BufExplorer<return>
 
+" Gundo
 nnoremap <leader>u :GundoToggle<CR>
 inoremap <leader>u <c-o>:GundoToggle<CR>
 
+" Vimrc stuff
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
+" Git shortcuts
 map <leader>gs :Gstatus<CR>
 map <leader>gw :Gwrite<CR>
 map <leader>gc :Gcommit<CR>
