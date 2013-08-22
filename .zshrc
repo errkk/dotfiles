@@ -30,3 +30,4 @@ alias gst="git status"
 pr() {hub pull-request -b pokelondon:develop -h pokelondon:feature/issue-"$1" -i "$1" }
 alias lg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 [[ -s /Users/eric/.nvm/nvm.sh ]] && . /Users/eric/.nvm/nvm.sh # This loads NVM
+alias cpwd="pwd | tr -d '\n' | pbcopy"
