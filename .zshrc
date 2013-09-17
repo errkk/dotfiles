@@ -19,6 +19,10 @@ locale-gen en_US.UTF-8
 
 source $ZSH/oh-my-zsh.sh
 
+# Jump words
+bindkey "[D" backward-word
+bindkey "[C" forward-word
+
 # Run .export if it exists
 if [ -f $HOME/.export ] ; then source $HOME/.export ; fi
 
@@ -29,5 +33,5 @@ alias rs="django-admin.py runserver 0.0.0.0:9000"
 alias gst="git status"
 pr() {hub pull-request -b pokelondon:develop -h pokelondon:feature/issue-"$1" -i "$1" }
 alias lg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-[[ -s /Users/eric/.nvm/nvm.sh ]] && . /Users/eric/.nvm/nvm.sh # This loads NVM
 alias cpwd="pwd | tr -d '\n' | pbcopy"
+[[ -s /Users/ericgeorge/.nvm/nvm.sh ]] && . /Users/ericgeorge/.nvm/nvm.sh  # This loads NVM
