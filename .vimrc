@@ -41,6 +41,9 @@ Bundle 'groenewege/vim-less'
 Bundle 'saltstack/salt-vim'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'editorconfig/editorconfig-vim'
+Bundle 'Shougo/neocomplete.vim'
+Bundle 'sudar/vim-arduino-syntax'
+Bundle 'tclem/vim-arduino'
 
 " Python bundles
 Bundle 'fs111/pydoc.vim'
@@ -57,7 +60,7 @@ Bundle 'tpope/vim-endwise'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'mgutz/vim-colors'
 Bundle 'ehamberg/vim-cute-python'
-Bundle 'Lokaltog/vim-powerline'
+Bundle 'bling/vim-airline'
 Bundle 'Gundo'
 Bundle 'tomtom/tlib_vim'
 Bundle 'editorconfig/editorconfig-vim'
@@ -67,6 +70,7 @@ Bundle 'Lokaltog/vim-easymotion'
 
 filetype plugin indent on
 let g:cssColorVimDoNotMessMyUpdatetime = 0
+let g:neocomplete#enable_at_startup = 1
 
 " Configurations
 """"""""""""""""
@@ -210,6 +214,11 @@ au BufNewFile,BufReadPost *.js setlocal shiftwidth=4 tabstop=4 expandtab
 " Get jinja filetype selection working correctly for *.jinja.html files.
 au BufNewFile,BufReadPost *.html.jinja setlocal filetype=htmljinja
 
+" Ardiuno filetypes
+"""""""""""""""""""""""""""
+au BufRead,BufNewFile *.pde set filetype=arduino
+au BufRead,BufNewFile *.ino set filetype=arduino
+
 " Make sure we hilight extra whitespace in the most annoying way possible.
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
@@ -285,9 +294,11 @@ map <leader>gb :Gblame<CR>
 map <leader>gd :Gdiff<CR>
 map <leader>ge :Gedit<CR>
 
-if has('gui_running')
-    let g:Powerline_symbols = 'fancy'
-endif
+"if has('gui_running')
+    "let g:Powerline_symbols = 'fancy'
+"endif
+
+let g:airline_powerline_fonts = 1
 
 " <space>w to jump to any word,
 " <space>f to jump to an occurence of a letter
@@ -297,3 +308,11 @@ let g:EasyMotion_leader_key = '<Space>'
 autocmd VimEnter * NERDTree
 let NERDTreeShowBookmarks=1
 let NERDTreeChDirMode=2
+
+" Some Linux distributions set filetype in /etc/vimrc.
+" Clear filetype flags before changing runtimepath to force Vim to reload them.
+filetype off
+filetype plugin indent off
+set runtimepath+=/usr/local/go/misc/vim
+filetype plugin indent on
+syntax on
