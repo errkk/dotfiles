@@ -72,6 +72,10 @@ filetype plugin indent on
 let g:cssColorVimDoNotMessMyUpdatetime = 0
 let g:neocomplete#enable_at_startup = 1
 
+
+let g:airline_powerline_fonts = 1
+
+
 " Configurations
 """"""""""""""""
 set background=dark
@@ -294,12 +298,10 @@ map <leader>gb :Gblame<CR>
 map <leader>gd :Gdiff<CR>
 map <leader>ge :Gedit<CR>
 
-"if has('gui_running')
-    "let g:Powerline_symbols = 'fancy'
-"endif
-
-let g:airline_powerline_fonts = 1
-
+if has('gui_running')
+    let g:Powerline_symbols = 'fancy'
+endif
+"
 " <space>w to jump to any word,
 " <space>f to jump to an occurence of a letter
 " <space>j to jump to any line
