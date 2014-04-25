@@ -88,6 +88,7 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+"set completeopt+=longest
 
 let g:airline_powerline_fonts = 1
 
@@ -99,7 +100,7 @@ set background=dark
 " Wildmenu completion
 """""""""""""""""""""
 set wildmenu
-set wildmode=list:longest
+set wildmode=list:longest,full
 set wildignore+=.hg,.git,.svn                    " Version control
 set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
