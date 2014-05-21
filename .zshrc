@@ -34,10 +34,11 @@ alias gst="git status"
 pr() {hub pull-request -b pokelondon:develop -h pokelondon:feature/issue-"$1" -i "$1" }
 alias lg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias cpwd="pwd | tr -d '\n' | pbcopy"
-[[ -s /Users/ericgeorge/.nvm/nvm.sh ]] && . /Users/ericgeorge/.nvm/nvm.sh  # This loads NVM
+source $(brew --prefix nvm)/nvm.sh
 ansiweather
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+export PATH=/usr/local/bin:$PATH
