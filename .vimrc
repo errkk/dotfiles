@@ -57,6 +57,7 @@ Bundle 'tpope/vim-endwise'
 
 " Fun, but not useful
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'chriskempson/base16-vim'
 Bundle 'mgutz/vim-colors'
 Bundle 'ehamberg/vim-cute-python'
 Bundle 'bling/vim-airline'
@@ -114,7 +115,7 @@ au VimResized * exe "normal! \<c-w>="
 au BufRead,BufNewFile *.html set filetype=html.html
 
 " Colours
-colorscheme solarized
+colorscheme base16-default
 " Basic
 syntax enable
 set number        " always show line numbers
