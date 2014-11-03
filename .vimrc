@@ -43,6 +43,7 @@ Bundle 'davidhalter/jedi-vim'
 Bundle 'Shougo/neocomplete.vim'
 Bundle 'sudar/vim-arduino-syntax'
 Bundle 'tclem/vim-arduino'
+Bundle 'digitaltoad/vim-jade'
 
 " Python bundles
 Bundle 'fs111/pydoc.vim'
@@ -118,7 +119,7 @@ let g:cssColorVimDoNotMessMyUpdatetime = 0
 " Neo Complete settings
 let g:acp_enableAtStartup = 0
 " Use neocomplete.
-"let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
 let g:neocomplete#enable_smart_case = 1
 "

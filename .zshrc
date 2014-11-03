@@ -23,6 +23,9 @@ if [ -f $HOME/.export ] ; then source $HOME/.export ; fi
 # Lots of PATH
 export PATH=$PATH:/usr/local/git/bin:/usr/local/share/npm/bin
 
+# Python Path
+export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
+
 alias rs="django-admin.py runserver 0.0.0.0:9000"
 alias gst="git status"
 alias lg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
