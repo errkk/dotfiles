@@ -6,7 +6,7 @@ ZSH_THEME="eric"
 
 DISABLE_AUTO_TITLE=true
 
-plugins=(git virtualenvwrapper git-flow django fabric git-hubflow github celery npm osx pip python)
+plugins=(git virtualenvwrapper git-flow django fabric git-hubflow github celery npm osx pip python emoji-clock heroku)
 
 export LANGUAGE=en_US.UTF-8
 export LANG=en_US.UTF-8
