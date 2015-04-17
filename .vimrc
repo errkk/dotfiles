@@ -6,6 +6,7 @@ set mouse=a
 call vundle#rc()
 
 
+
 " Vundle help
 " " """""""""""
 " " :BundleList          - list configured bundles
@@ -15,7 +16,6 @@ call vundle#rc()
 
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
-
 
 " VCS
 Bundle 'tpope/vim-fugitive'
@@ -46,7 +46,8 @@ Bundle 'Shougo/neomru.vim'
 "Bundle 'sudar/vim-arduino-syntax'
 "Bundle 'tclem/vim-arduino'
 Bundle 'digitaltoad/vim-jade'
-
+Bundle 'burnettk/vim-angular'
+Bundle 'sophacles/vim-processing'
 " Python bundles
 Bundle 'fs111/pydoc.vim'
 Bundle 'nvie/vim-flake8'
@@ -59,7 +60,6 @@ Bundle "vim-ruby/vim-ruby"
 Bundle 'tpope/vim-endwise'
 
 " Fun, but not useful
-Bundle 'altercation/vim-colors-solarized'
 Bundle 'chriskempson/base16-vim'
 Bundle 'mgutz/vim-colors'
 Bundle 'bling/vim-airline'
@@ -118,7 +118,7 @@ let g:cssColorVimDoNotMessMyUpdatetime = 0
 " Neo Complete settings
 let g:acp_enableAtStartup = 0
 " Use neocomplete.
-let g:neocomplete#enable_at_startup = 0
+let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
 let g:neocomplete#enable_smart_case = 1
 "
@@ -130,13 +130,17 @@ set completeopt+=longest
 let g:neocomplete#enable_auto_select = 1
 
 " Enable omni completion.
-"autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-"autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-"autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-let g:neocomplcache_disable_auto_complete=1
+if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+endif
+
+let g:neocomplcache_disable_auto_complete=0
 
 let g:airline_powerline_fonts = 1
 
