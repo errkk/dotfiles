@@ -22,32 +22,28 @@ Plugin 'airblade/vim-gitgutter'
 
 " System
 Plugin 'scrooloose/nerdtree'
-"Plugin 'majutsushi/tagbar'
 Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-surround'
-"Plugin 'ervandew/supertab'
 Plugin 'Raimondi/delimitMate'
-Plugin 'sophacles/vim-bundle-sparkup'
 Plugin 'corntrace/bufexplorer'
 Plugin 'goldfeld/vim-seek'
 
-" Syntaxes and such.
+" Syntaxes
 Plugin 'leshill/vim-json'
-"Plugin 'rodjek/vim-puppet'
 Plugin 'skammer/vim-css-color'
 Plugin 'groenewege/vim-less'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'saltstack/salt-vim'
 Plugin 'davidhalter/jedi-vim'
-Plugin 'Shougo/neocomplete.vim'
-Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/neomru.vim'
-"Plugin 'sudar/vim-arduino-syntax'
-"Plugin 'tclem/vim-arduino'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'burnettk/vim-angular'
 Plugin 'sophacles/vim-processing'
+
+" Neo Complete
+Plugin 'Shougo/neocomplete.vim'
+
 " Python bundles
 Plugin 'fs111/pydoc.vim'
 Plugin 'nvie/vim-flake8'
@@ -64,57 +60,15 @@ Plugin 'chriskempson/base16-vim'
 Plugin 'mgutz/vim-colors'
 Plugin 'bling/vim-airline'
 Plugin 'Gundo'
-"Plugin 'tomtom/tlib_vim'
 Plugin 'editorconfig/editorconfig-vim'
+
 Plugin 'ctrlp.vim'
 Plugin 'Lokaltog/vim-easymotion'
 
+" All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-"call unite#filters#matcher_default#use(['matcher_fuzzy'])
-"call unite#filters#sorter_default#use(['sorter_rank'])
-"call unite#set_profile('files', 'smartcase', 1)
-"call unite#custom#source('line,outline','matchers','matcher_fuzzy')
-let g:unite_data_directory='~/.vim/.cache'
-let g:unite_enable_start_insert=1
-let g:unite_source_history_yank_enable=1
-let g:unite_source_rec_max_cache_files=5000
-let g:unite_prompt='» '
-
-if executable('ag')
-    let g:unite_source_grep_command='ag'
-    let g:unite_source_grep_default_opts='--nocolor --line-numbers --nogroup -S -C4'
-    let g:unite_source_grep_recursive_opt=''
-elseif executable('ack')
-    let g:unite_source_grep_command='ack'
-    let g:unite_source_grep_default_opts='--no-heading --no-color -C4'
-    let g:unite_source_grep_recursive_opt=''
-endif
-
-function! s:unite_settings()
-    nmap <buffer> Q <plug>(unite_exit)
-    nmap <buffer> <esc> <plug>(unite_exit)
-    imap <buffer> <esc> <plug>(unite_exit)
-endfunction
-
-autocmd FileType unite call s:unite_settings()
-
-nmap <space> [unite]
-nnoremap [unite] <nop>
-
-nnoremap <silent> [unite]<space> :<C-u>Unite -toggle -auto-resize -buffer-name=mixed file_rec/async:! buffer file_mru bookmark<cr><c-u>
-nnoremap <silent> [unite]f :<C-u>Unite -toggle -auto-resize -buffer-name=files file_rec/async:!<cr><c-u>
-nnoremap <silent> [unite]e :<C-u>Unite -buffer-name=recent file_mru<cr>
-nnoremap <silent> [unite]y :<C-u>Unite -buffer-name=yanks history/yank<cr>
-nnoremap <silent> [unite]l :<C-u>Unite -auto-resize -buffer-name=line line<cr>
-nnoremap <silent> [unite]b :<C-u>Unite -auto-resize -buffer-name=buffers buffer<cr>
-nnoremap <silent> [unite]/ :<C-u>Unite -no-quit -buffer-name=search grep:.<cr>
-nnoremap <silent> [unite]m :<C-u>Unite -auto-resize -buffer-name=mappings mapping<cr>
-nnoremap <silent> [unite]s :<C-u>Unite -quick-match buffer<cr>
-
-
-filetype plugin indent on
 let g:cssColorVimDoNotMessMyUpdatetime = 0
 
 " Neo Complete settings
@@ -306,12 +260,11 @@ autocmd BufWritePre *.js :%s/\s\+$//e
 autocmd BufWritePre *.html :%s/\s\+$//e
 autocmd BufWritePre *.css :%s/\s\+$//e
 autocmd BufWritePre *.less :%s/\s\+$//e
+autocmd BufWritePre *.scss :%s/\s\+$//e
 
 " Custom mappings
 """"""""""""""""""
-
-" Genral
-noremap <silent> <F3> :QFix<CR>
+" General
 :nmap <C-n> :bnext<CR>
 :nmap ; :CtrlPBuffer<CR>
 
@@ -319,25 +272,22 @@ noremap <silent> <F3> :QFix<CR>
 let mapleader = ","
 let g:mapleader = ","
 
+" Vim Seek Keys
+let g:SeekKey = '<Space>'
+let g:SeekBackKey = '<S-Space>'
+
+" Disable S for substitue
+let g:seek_subst_disable = 1
+
 " Get rid of search hilighting with ,/
 nnoremap <silent> <leader>/ :nohlsearch<CR>
 
 " Fix those pesky situations where you edit & need sudo to save
 cmap w!! w !sudo tee % >/dev/null
 
-
 " Plugin configurations
-"""""""""""""""""""""""         "
+"""""""""""""""""""""""
 let g:pep8_map= '+'
-
-" TagBar
-nnoremap <silent> <F2> :TagbarToggle<CR>
-let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
-let g:tagbar_autoshowtag = 1
-
-" NERDTree
-nnoremap <Leader>g :NERDTreeToggle<CR>
-let NERDTreeIgnore = ['\.pyc$']
 
 " Sparkup
 let g:sparkupExecuteMapping = '<c-y>'
@@ -358,15 +308,8 @@ noremap <leader>b :BufExplorer<return>
 nnoremap <leader>u :GundoToggle<CR>
 inoremap <leader>u <c-o>:GundoToggle<CR>
 
-" Vim Seek Keys
-let g:SeekKey = '<Space>'
-let g:SeekBackKey = '<S-Space>'
-
-" Disable S for substitue
-let g:seek_subst_disable = 1
-
 " Vimrc stuff
-nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>ev :e $MYVIMRC
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 " Git shortcuts
@@ -380,20 +323,12 @@ map <leader>ge :Gedit<CR>
 if has('gui_running')
     let g:Powerline_symbols = 'fancy'
 endif
-"
-" <C+space>w to jump to any word,
-" <C+pace>f to jump to an occurence of a letter
-" <C+space>j to jump to any line
-let g:EasyMotion_leader_key = '<[>'
 
+" NERDTree
+nnoremap <Leader>g :NERDTreeToggle<CR>
+let NERDTreeIgnore = ['\.pyc$']
+
+" NerdTree Auto Open
 autocmd VimEnter * NERDTree
 let NERDTreeShowBookmarks=1
 let NERDTreeChDirMode=2
-
-" Some Linux distributions set filetype in /etc/vimrc.
-" Clear filetype flags before changing runtimepath to force Vim to reload them.
-filetype off
-filetype plugin indent off
-set runtimepath+=/usr/local/go/misc/vim
-filetype plugin indent on
-syntax on
