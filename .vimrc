@@ -1,79 +1,81 @@
 set encoding=utf-8
-set nocompatible               " be iMproved
-filetype off
-set rtp+=~/.vim/bundle/vundle/
-set mouse=a
-call vundle#rc()
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " Vundle help
 " " """""""""""
-" " :BundleList          - list configured bundles
-" " :BundleInstall(!)    - install(update) bundles
-" " :BundleSearch(!) foo - search(or refresh cache first) for foo
-" " :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+" " :PluginList          - list configured bundles
+" " :PluginInstall(!)    - install(update) bundles
+" " :PluginSearch(!) foo - search(or refresh cache first) for foo
+" " :PluginClean(!)      - confirm(or auto-approve) removal of unused bundles
 
 " let Vundle manage Vundle
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/Vundle'
 
 " VCS
-Bundle 'tpope/vim-fugitive'
-Bundle 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
 
 " System
-Bundle 'scrooloose/nerdtree'
-"Bundle 'majutsushi/tagbar'
-Bundle 'mileszs/ack.vim'
-Bundle 'scrooloose/nerdcommenter'
-"Bundle 'tpope/vim-surround'
-"Bundle 'ervandew/supertab'
-Bundle 'Raimondi/delimitMate'
-Bundle 'sophacles/vim-bundle-sparkup'
-Bundle 'corntrace/bufexplorer'
-Bundle 'goldfeld/vim-seek'
+Plugin 'scrooloose/nerdtree'
+"Plugin 'majutsushi/tagbar'
+Plugin 'mileszs/ack.vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-surround'
+"Plugin 'ervandew/supertab'
+Plugin 'Raimondi/delimitMate'
+Plugin 'sophacles/vim-bundle-sparkup'
+Plugin 'corntrace/bufexplorer'
+Plugin 'goldfeld/vim-seek'
 
 " Syntaxes and such.
-Bundle 'leshill/vim-json'
-"Bundle 'rodjek/vim-puppet'
-Bundle 'skammer/vim-css-color'
-Bundle 'groenewege/vim-less'
-Bundle 'saltstack/salt-vim'
-Bundle 'davidhalter/jedi-vim'
-Bundle 'Shougo/neocomplete.vim'
-Bundle 'Shougo/unite.vim'
-Bundle 'Shougo/neomru.vim'
-"Bundle 'sudar/vim-arduino-syntax'
-"Bundle 'tclem/vim-arduino'
-Bundle 'digitaltoad/vim-jade'
-Bundle 'burnettk/vim-angular'
-Bundle 'sophacles/vim-processing'
+Plugin 'leshill/vim-json'
+"Plugin 'rodjek/vim-puppet'
+Plugin 'skammer/vim-css-color'
+Plugin 'groenewege/vim-less'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'saltstack/salt-vim'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/neomru.vim'
+"Plugin 'sudar/vim-arduino-syntax'
+"Plugin 'tclem/vim-arduino'
+Plugin 'digitaltoad/vim-jade'
+Plugin 'burnettk/vim-angular'
+Plugin 'sophacles/vim-processing'
 " Python bundles
-Bundle 'fs111/pydoc.vim'
-Bundle 'nvie/vim-flake8'
-Bundle 'atourino/jinja.vim'
-Bundle 'vim-scripts/python_match.vim'
-Bundle 'scrooloose/syntastic'
+Plugin 'fs111/pydoc.vim'
+Plugin 'nvie/vim-flake8'
+Plugin 'atourino/jinja.vim'
+Plugin 'vim-scripts/python_match.vim'
+Plugin 'scrooloose/syntastic'
 
 " Ruby specific
-Bundle "vim-ruby/vim-ruby"
-Bundle 'tpope/vim-endwise'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-endwise'
 
 " Fun, but not useful
-Bundle 'chriskempson/base16-vim'
-Bundle 'mgutz/vim-colors'
-Bundle 'bling/vim-airline'
-Bundle 'Gundo'
-"Bundle 'tomtom/tlib_vim'
-Bundle 'editorconfig/editorconfig-vim'
-Bundle 'ctrlp.vim'
-Bundle 'Lokaltog/vim-easymotion'
+Plugin 'chriskempson/base16-vim'
+Plugin 'mgutz/vim-colors'
+Plugin 'bling/vim-airline'
+Plugin 'Gundo'
+"Plugin 'tomtom/tlib_vim'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'ctrlp.vim'
+Plugin 'Lokaltog/vim-easymotion'
 
+call vundle#end()            " required
+filetype plugin indent on    " required
 
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
-call unite#set_profile('files', 'smartcase', 1)
-call unite#custom#source('line,outline','matchers','matcher_fuzzy')
+"call unite#filters#matcher_default#use(['matcher_fuzzy'])
+"call unite#filters#sorter_default#use(['sorter_rank'])
+"call unite#set_profile('files', 'smartcase', 1)
+"call unite#custom#source('line,outline','matchers','matcher_fuzzy')
 let g:unite_data_directory='~/.vim/.cache'
 let g:unite_enable_start_insert=1
 let g:unite_source_history_yank_enable=1
@@ -355,6 +357,13 @@ noremap <leader>b :BufExplorer<return>
 " Gundo
 nnoremap <leader>u :GundoToggle<CR>
 inoremap <leader>u <c-o>:GundoToggle<CR>
+
+" Vim Seek Keys
+let g:SeekKey = '<Space>'
+let g:SeekBackKey = '<S-Space>'
+
+" Disable S for substitue
+let g:seek_subst_disable = 1
 
 " Vimrc stuff
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
