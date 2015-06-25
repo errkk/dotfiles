@@ -100,6 +100,11 @@ let g:neocomplcache_disable_auto_complete=0
 
 let g:airline_powerline_fonts = 1
 
+" Use ag command for ack.vim
+if executable('ag')
+      let g:ackprg = 'ag --vimgrep'
+  endif
+endif
 
 " Configurations
 """"""""""""""""
@@ -131,6 +136,7 @@ au VimResized * exe "normal! \<c-w>="
 au BufRead,BufNewFile *.html set filetype=html.html
 
 " Colours
+"let base16colorspace=256
 colorscheme base16-default
 " Basic
 syntax enable
