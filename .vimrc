@@ -102,8 +102,7 @@ let g:airline_powerline_fonts = 1
 
 " Use ag command for ack.vim
 if executable('ag')
-      let g:ackprg = 'ag --vimgrep'
-  endif
+    let g:ackprg = 'ag --vimgrep'
 endif
 
 " Configurations
