@@ -6,7 +6,7 @@ ZSH_THEME="eric"
 
 DISABLE_AUTO_TITLE=true
 
-plugins=(git virtualenvwrapper git-flow django fabric git-hubflow github celery npm osx pip python emoji-clock heroku)
+plugins=(git virtualenvwrapper git-flow django fabric git-hubflow github celery npm osx pip python emoji-clock heroku docker docker-compose emmoji thefuck)
 
 export LANGUAGE=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -31,3 +31,4 @@ alias gst="git status"
 alias lg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias cpwd="pwd | tr -d '\n' | pbcopy"
 source ~/.salt-poke/tools/update_check.sh
+eval "$(thefuck --alias)"
