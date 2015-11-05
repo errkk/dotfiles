@@ -40,6 +40,7 @@ Plugin 'Shougo/neomru.vim'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'burnettk/vim-angular'
 Plugin 'sophacles/vim-processing'
+Plugin 'mxw/vim-jsx'
 
 " Neo Complete
 Plugin 'Shougo/neocomplete.vim'
@@ -57,13 +58,16 @@ Plugin 'tpope/vim-endwise'
 
 " Fun, but not useful
 Plugin 'chriskempson/base16-vim'
+Plugin 'jdkanani/vim-material-theme'
 Plugin 'mgutz/vim-colors'
 Plugin 'bling/vim-airline'
 Plugin 'Gundo'
 Plugin 'editorconfig/editorconfig-vim'
-
+Bundle 'wakatime/vim-wakatime'
 Plugin 'ctrlp.vim'
 Plugin 'Lokaltog/vim-easymotion'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'rizzatti/dash.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -105,10 +109,6 @@ if executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
 
-" Configurations
-""""""""""""""""
-set background=dark
-
 " Wildmenu completion
 """""""""""""""""""""
 set wildmenu
@@ -135,10 +135,10 @@ au VimResized * exe "normal! \<c-w>="
 au BufRead,BufNewFile *.html set filetype=html.html
 
 " Colours
-"let base16colorspace=256
-colorscheme base16-default
-" Basic
 syntax enable
+set background=dark
+colorscheme material-theme
+
 set number        " always show line numbers
 set hidden        " Allow un-saved buffers in background
 set clipboard=unnamed " Share system clipboard.
@@ -158,6 +158,9 @@ set undolevels=1000      " use many muchos levels of undo
 set title                " change the terminal's title
 set visualbell           " don't beep
 set noerrorbells         " don't beep
+set modelines=1
+set cursorline
+set lazyredraw
 
 " Remove the toolbar if we're running under a GUI (e.g. MacVIM).
 if has("gui_running")
@@ -305,6 +308,10 @@ let g:syntastic_enable_signs=1
 let g:syntastic_auto_jump=0
 
 let &t_Co=256
+
+let g:syntastic_javascript_checkers = ['eslint']
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+
 
 " Show all open buffers
 noremap <leader>b :BufExplorer<return>
