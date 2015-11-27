@@ -11,8 +11,9 @@ plugins=(git virtualenvwrapper git-flow django fabric git-hubflow github celery 
 export LANGUAGE=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
+export REACT_EDITOR=mvim
+
 source $ZSH/oh-my-zsh.sh
-source REACT_EDITOR=mvim
 
 # Jump words
 bindkey "[D" backward-word

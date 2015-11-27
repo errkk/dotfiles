@@ -40,7 +40,9 @@ Plugin 'Shougo/neomru.vim'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'burnettk/vim-angular'
 Plugin 'sophacles/vim-processing'
+Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
+Plugin 'flowtype/vim-flow'
 
 " Neo Complete
 Plugin 'Shougo/neocomplete.vim'
@@ -309,6 +311,7 @@ let g:syntastic_auto_jump=0
 
 let &t_Co=256
 
+let g:javascript_enable_domhtmlcss = 1
 let g:syntastic_javascript_checkers = ['eslint']
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
@@ -323,6 +326,9 @@ inoremap <leader>u <c-o>:GundoToggle<CR>
 " Vimrc stuff
 nmap <silent> <leader>ev :e $MYVIMRC
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
+" Flow Type
+let g:flow#autoclose = 1
 
 " Git shortcuts
 map <leader>gs :Gstatus<CR>
