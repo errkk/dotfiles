@@ -58,9 +58,12 @@ Plugin 'scrooloose/syntastic'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-endwise'
 
-" Fun, but not useful
+" Colours
 Plugin 'chriskempson/base16-vim'
 Plugin 'jdkanani/vim-material-theme'
+Plugin 'mhartington/oceanic-next'
+
+" Stuff
 Plugin 'mgutz/vim-colors'
 Plugin 'bling/vim-airline'
 Plugin 'Gundo'
@@ -138,8 +141,10 @@ au BufRead,BufNewFile *.html set filetype=html.html
 
 " Colours
 syntax enable
+let &t_Co=256
 set background=dark
-colorscheme material-theme
+colorscheme OceanicNext
+let g:airline_theme='oceanicnext'
 
 set number        " always show line numbers
 set hidden        " Allow un-saved buffers in background
@@ -308,8 +313,6 @@ set laststatus=2
 set statusline=%F%m%r%h%w\ (%{&ff}){%Y}\ [%l,%v][%p%%]
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_jump=0
-
-let &t_Co=256
 
 let g:javascript_enable_domhtmlcss = 1
 let g:syntastic_javascript_checkers = ['eslint']
