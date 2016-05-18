@@ -56,6 +56,7 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-endwise'
 
 " Fun, but not useful
+Plugin 'jdkanani/vim-material-theme'
 Plugin 'chriskempson/base16-vim'
 Plugin 'mgutz/vim-colors'
 Plugin 'bling/vim-airline'
@@ -105,10 +106,6 @@ if executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
 
-" Configurations
-""""""""""""""""
-set background=dark
-
 " Wildmenu completion
 """""""""""""""""""""
 set wildmenu
@@ -136,9 +133,11 @@ au BufRead,BufNewFile *.html set filetype=html.html
 
 " Colours
 "let base16colorspace=256
-colorscheme base16-default
-" Basic
 syntax enable
+set background=dark
+colorscheme material-theme
+
+" Basic
 set number        " always show line numbers
 set hidden        " Allow un-saved buffers in background
 set clipboard=unnamed " Share system clipboard.
