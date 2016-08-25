@@ -14,7 +14,7 @@ call vundle#begin()
 " " :PluginClean(!)      - confirm(or auto-approve) removal of unused bundles
 
 " let Vundle manage Vundle
-Plugin 'gmarik/Vundle'
+Plugin 'VundleVim/Vundle.vim'
 
 " VCS
 Plugin 'tpope/vim-fugitive'
@@ -43,10 +43,12 @@ Plugin 'sophacles/vim-processing'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'flowtype/vim-flow'
+Plugin 'evanmiller/nginx-vim-syntax'
 
 " Neo Complete
 "Plugin 'Shougo/neocomplece.vim'
 Plugin 'valloric/YouCompleteMe'
+Plugin 'ternjs/tern_for_vim'
 
 
 " Python bundles
@@ -82,20 +84,6 @@ filetype plugin indent on    " required
 
 let g:cssColorVimDoNotMessMyUpdatetime = 0
 
-"" Neo Complete settings
-"let g:acp_enableAtStartup = 0
-"" Use neocomplete.
-"let g:neocomplete#enable_at_startup = 1
-"" Use smartcase.
-"let g:neocomplete#enable_smart_case = 1
-""
-"" Set minimum syntax keyword length.
-"let g:neocomplete#sources#syntax#min_keyword_length = 4
-"set completeopt+=longest
-
-"" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 0
-""
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
@@ -107,15 +95,6 @@ endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
-"inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-"inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-
-"if !exists('g:neocomplete#sources#omni#input_patterns')
-    "let g:neocomplete#sources#omni#input_patterns = {}
-"endif
-
-"let g:neocomplcache_disable_auto_complete=1
-
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
