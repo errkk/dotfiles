@@ -40,9 +40,15 @@ Plugin 'Shougo/neomru.vim'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'burnettk/vim-angular'
 Plugin 'sophacles/vim-processing'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'flowtype/vim-flow'
+Plugin 'elixir-lang/vim-elixir'
 
 " Neo Complete
-Plugin 'Shougo/neocomplete.vim'
+"Plugin 'Shougo/neocomplece.vim'
+Plugin 'valloric/YouCompleteMe'
+
 
 " Python bundles
 Plugin 'fs111/pydoc.vim'
@@ -55,16 +61,20 @@ Plugin 'scrooloose/syntastic'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-endwise'
 
-" Fun, but not useful
-Plugin 'jdkanani/vim-material-theme'
+" Colours
 Plugin 'chriskempson/base16-vim'
+Plugin 'jdkanani/vim-material-theme'
+Plugin 'mhartington/oceanic-next'
+
+" Stuff
 Plugin 'mgutz/vim-colors'
 Plugin 'bling/vim-airline'
 Plugin 'Gundo'
 Plugin 'editorconfig/editorconfig-vim'
-
 Plugin 'ctrlp.vim'
 Plugin 'Lokaltog/vim-easymotion'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'rizzatti/dash.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -72,19 +82,40 @@ filetype plugin indent on    " required
 
 let g:cssColorVimDoNotMessMyUpdatetime = 0
 
-" Neo Complete settings
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-"
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 4
-set completeopt+=longest
+"" Neo Complete settings
+"let g:acp_enableAtStartup = 0
+"" Use neocomplete.
+"let g:neocomplete#enable_at_startup = 1
+"" Use smartcase.
+"let g:neocomplete#enable_smart_case = 1
+""
+"" Set minimum syntax keyword length.
+"let g:neocomplete#sources#syntax#min_keyword_length = 4
+"set completeopt+=longest
 
-" AutoComplPop like behavior.
-let g:neocomplete#enable_auto_select = 1
+"" AutoComplPop like behavior.
+"let g:neocomplete#enable_auto_select = 0
+""
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  "return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+"inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+"inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+
+"if !exists('g:neocomplete#sources#omni#input_patterns')
+    "let g:neocomplete#sources#omni#input_patterns = {}
+"endif
+
+"let g:neocomplcache_disable_auto_complete=1
+
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -92,12 +123,6 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
-endif
-
-let g:neocomplcache_disable_auto_complete=0
 
 let g:airline_powerline_fonts = 1
 
@@ -132,12 +157,12 @@ au VimResized * exe "normal! \<c-w>="
 au BufRead,BufNewFile *.html set filetype=html.html
 
 " Colours
-"let base16colorspace=256
 syntax enable
+let &t_Co=256
 set background=dark
-colorscheme material-theme
+colorscheme OceanicNext
+let g:airline_theme='oceanicnext'
 
-" Basic
 set number        " always show line numbers
 set hidden        " Allow un-saved buffers in background
 set clipboard=unnamed " Share system clipboard.
@@ -157,6 +182,9 @@ set undolevels=1000      " use many muchos levels of undo
 set title                " change the terminal's title
 set visualbell           " don't beep
 set noerrorbells         " don't beep
+set modelines=1
+set cursorline
+set lazyredraw
 
 " Remove the toolbar if we're running under a GUI (e.g. MacVIM).
 if has("gui_running")
@@ -303,7 +331,10 @@ set statusline=%F%m%r%h%w\ (%{&ff}){%Y}\ [%l,%v][%p%%]
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_jump=0
 
-let &t_Co=256
+let g:javascript_enable_domhtmlcss = 1
+let g:syntastic_javascript_checkers = ['eslint']
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+
 
 " Show all open buffers
 noremap <leader>b :BufExplorer<return>
@@ -315,6 +346,9 @@ inoremap <leader>u <c-o>:GundoToggle<CR>
 " Vimrc stuff
 nmap <silent> <leader>ev :e $MYVIMRC
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
+" Flow Type
+let g:flow#autoclose = 1
 
 " Git shortcuts
 map <leader>gs :Gstatus<CR>

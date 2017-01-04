@@ -6,11 +6,13 @@ ZSH_THEME="eric"
 
 DISABLE_AUTO_TITLE=true
 
-plugins=(git virtualenvwrapper git-flow django fabric git-hubflow github celery npm osx pip python emoji-clock heroku)
+plugins=(git virtualenvwrapper git-flow django fabric git-hubflow github celery npm osx pip python emoji-clock heroku docker docker-compose emmoji thefuck)
 
 export LANGUAGE=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
+export REACT_EDITOR=mvim
+
 source $ZSH/oh-my-zsh.sh
 
 # Jump words
@@ -21,7 +23,8 @@ bindkey "[C" forward-word
 if [ -f $HOME/.export ] ; then source $HOME/.export ; fi
 
 # Lots of PATH
-export PATH=$PATH:/usr/local/git/bin:/usr/local/share/npm/bin
+export PATH=$PATH:/usr/local/git/bin:/usr/local/bin
+export PATH=$HOME/.node/bin:$PATH
 
 # Python Path
 export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
@@ -31,3 +34,11 @@ alias gst="git status"
 alias lg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias cpwd="pwd | tr -d '\n' | pbcopy"
 source ~/.salt-poke/tools/update_check.sh
+eval "$(thefuck --alias)"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+export NVM_DIR="/Users/eric/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

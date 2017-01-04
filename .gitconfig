@@ -20,7 +20,14 @@
     log = true
 [core]
     editor = 'vim'
+	excludesfile = /Volumes/Data/Users/erigeorg/.gitignore_global
 [push]
     default = simple
 [alias]
 	g = grep --break --heading --line-number
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
