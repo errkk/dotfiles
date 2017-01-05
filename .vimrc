@@ -64,8 +64,8 @@ Plugin 'tpope/vim-endwise'
 
 " Colours
 Plugin 'chriskempson/base16-vim'
-Plugin 'jdkanani/vim-material-theme'
 Plugin 'mhartington/oceanic-next'
+Plugin 'joshdick/onedark.vim'
 
 " Stuff
 Plugin 'mgutz/vim-colors'
@@ -105,6 +105,12 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 let g:airline_powerline_fonts = 1
 
+if has('gui_running')
+    set guioptions=-t
+    let g:Powerline_symbols = 'fancy'
+    set guifont=Monaco\ for\ Powerline:h12
+endif
+
 " Use ag command for ack.vim
 if executable('ag')
     let g:ackprg = 'ag --vimgrep'
@@ -139,8 +145,9 @@ au BufRead,BufNewFile *.html set filetype=html.html
 syntax enable
 let &t_Co=256
 set background=dark
-colorscheme OceanicNext
-let g:airline_theme='oceanicnext'
+colorscheme onedark
+let g:airline_theme='onedark'
+let g:onedark_termcolors=16
 
 set number        " always show line numbers
 set hidden        " Allow un-saved buffers in background
@@ -164,11 +171,6 @@ set noerrorbells         " don't beep
 set modelines=1
 set cursorline
 set lazyredraw
-
-" Remove the toolbar if we're running under a GUI (e.g. MacVIM).
-if has("gui_running")
-  set guioptions=-t
-endif
 
 " Special characters for hilighting non-priting spaces/tabs/etc.
 set list listchars=tab:→\ ,trail:·
@@ -336,10 +338,6 @@ map <leader>gc :Gcommit<CR>
 map <leader>gb :Gblame<CR>
 map <leader>gd :Gdiff<CR>
 map <leader>ge :Gedit<CR>
-
-if has('gui_running')
-    let g:Powerline_symbols = 'fancy'
-endif
 
 " NERDTree
 nnoremap <Leader>g :NERDTreeToggle<CR>

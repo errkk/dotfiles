@@ -2,11 +2,11 @@
 ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
-ZSH_THEME="eric"
+ZSH_THEME="sorin"
 
 DISABLE_AUTO_TITLE=true
 
-plugins=(git virtualenvwrapper git-flow django fabric git-hubflow github celery npm osx pip python emoji-clock heroku docker docker-compose emmoji thefuck)
+plugins=(git virtualenvwrapper git-flow django fabric git-hubflow github celery npm osx pip python emoji-clock heroku docker docker-compose emmoji)
 
 export LANGUAGE=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -32,5 +32,8 @@ alias rs="django-admin.py runserver 0.0.0.0:9000"
 alias gst="git status"
 alias lg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias cpwd="pwd | tr -d '\n' | pbcopy"
-source ~/.salt-poke/tools/update_check.sh
-eval "$(thefuck --alias)"
+
+export NVM_DIR="/Users/eric/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+eval "$(rbenv init -)"
