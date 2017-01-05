@@ -44,6 +44,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'flowtype/vim-flow'
 Plugin 'evanmiller/nginx-vim-syntax'
+Plugin 'elixir-lang/vim-elixir'
 
 " Neo Complete
 "Plugin 'Shougo/neocomplece.vim'
@@ -66,6 +67,7 @@ Plugin 'tpope/vim-endwise'
 Plugin 'chriskempson/base16-vim'
 Plugin 'mhartington/oceanic-next'
 Plugin 'joshdick/onedark.vim'
+Plugin 'jdkanani/vim-material-theme'
 
 " Stuff
 Plugin 'mgutz/vim-colors'
@@ -83,18 +85,6 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 let g:cssColorVimDoNotMessMyUpdatetime = 0
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  "return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-  " For no inserting <CR> key.
-  return pumvisible() ? "\<C-y>" : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
