@@ -34,7 +34,6 @@ Plugin 'leshill/vim-json'
 Plugin 'skammer/vim-css-color'
 Plugin 'groenewege/vim-less'
 Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'saltstack/salt-vim'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'Shougo/neomru.vim'
 Plugin 'digitaltoad/vim-jade'
@@ -46,11 +45,8 @@ Plugin 'flowtype/vim-flow'
 Plugin 'evanmiller/nginx-vim-syntax'
 Plugin 'elixir-lang/vim-elixir'
 
-" Neo Complete
-"Plugin 'Shougo/neocomplece.vim'
+" Auto Complete
 Plugin 'valloric/YouCompleteMe'
-Plugin 'ternjs/tern_for_vim'
-
 
 " Python bundles
 Plugin 'fs111/pydoc.vim'
@@ -89,9 +85,11 @@ let g:cssColorVimDoNotMessMyUpdatetime = 0
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType javascript,jsx setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+set completeopt=noselect,menuone,preview
+set shortmess+=c
 
 let g:airline_powerline_fonts = 1
 
@@ -104,7 +102,63 @@ endif
 " Use ag command for ack.vim
 if executable('ag')
     let g:ackprg = 'ag --vimgrep'
+    let g:agprg='ag -S --nocolor --nogroup --column --ignore "*/node_modules/*" --ignore "*/public/*"'
 endif
+
+
+""" Auto reformat JS
+"format javascript on save with prettier
+if executable('prettier')
+  autocmd BufWritePre *.js call PrettierFormat()
+endif
+
+"much of the following code is taken/repurposed from fatih/vim-go:
+"https://github.com/fatih/vim-go/blob/1425dec/autoload/go/fmt.vim
+function! PrettierFormat() abort
+  "save cursor position and many other things
+  let l:curw = winsaveview()
+
+  "write current unsaved buffer to a temp file
+  let l:tmpname = tempname()
+  call writefile(getline(1, '$'), l:tmpname)
+
+  "format temp file and replace actual file
+  let out = system('prettier --write ' . l:tmpname)
+  if v:shell_error == 0
+    call PrettierUpdateFile(l:tmpname, expand('%'))
+  else
+    "we didn't use the temp file, so clean up
+    call delete(l:tmpname)
+  endif
+
+  "restore our cursor/windows positions
+  call winrestview(l:curw)
+endfunction
+
+"replaces the target file with the formatted source file
+function! PrettierUpdateFile(source, target)
+  "remove undo point caused via BufWritePre
+  try | silent undojoin | catch | endtry
+
+  let old_fileformat = &fileformat
+  if exists('*getfperm')
+    "save file permissions
+    let original_fperm = getfperm(a:target)
+  endif
+
+  call rename(a:source, a:target)
+
+  "restore file permissions
+  if exists('*setfperm') && original_fperm != ''
+    call setfperm(a:target , original_fperm)
+  endif
+
+  "reload buffer to reflect latest changes
+  silent! edit!
+
+  let &fileformat = old_fileformat
+  let &syntax = &syntax
+endfunction
 
 " Wildmenu completion
 """""""""""""""""""""
@@ -166,9 +220,9 @@ set lazyredraw
 set list listchars=tab:→\ ,trail:·
 
 " Tabs & spaces
-set tabstop=4     " a tab is four spaces
-set shiftwidth=4  " number of spaces to use for autoindenting
-set softtabstop=4
+set tabstop=2     " a tab is four spaces
+set shiftwidth=2  " number of spaces to use for autoindenting
+set softtabstop=2
 set expandtab
 set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
 set smarttab      " insert tabs on the start of a line according to
@@ -194,8 +248,8 @@ vnoremap / /\v
 noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
 
 " :W should save as well
-command W w
-command Q q
+"command W w
+"command Q q
 
 " Copy visual selection
 vmap <C-c> "*y
@@ -242,7 +296,7 @@ au BufNewFile,BufReadPost *.coffee setlocal shiftwidth=2 expandtab
 
 " Javascript configurations
 """""""""""""""""""""""""""
-au BufNewFile,BufReadPost *.js setlocal shiftwidth=4 tabstop=4 expandtab
+au BufNewFile,BufReadPost *.js setlocal shiftwidth=2 tabstop=2 expandtab
 
 " Get jinja filetype selection working correctly for *.jinja.html files.
 au BufNewFile,BufReadPost *.html.jinja setlocal filetype=htmljinja

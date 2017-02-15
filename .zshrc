@@ -1,19 +1,31 @@
+source "$HOME/.slimzsh/slim.zsh"
+
+alias a='fasd -a'        # any
+alias s='fasd -si'       # show / search / select
+alias d='fasd -d'        # directory
+alias f='fasd -f'        # file
+alias sd='fasd -sid'     # interactive directory selection
+alias sf='fasd -sif'     # interactive file selection
+alias z='fasd_cd -d'     # cd, same functionality as j in autojump
+alias zz='fasd_cd -d -i' # cd with interactive selection
+#
 # Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
+
+#ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
-ZSH_THEME="eric"
+#ZSH_THEME="eric"
 
-DISABLE_AUTO_TITLE=true
+#DISABLE_AUTO_TITLE=true
 
-plugins=(git virtualenvwrapper git-flow django fabric git-hubflow github celery npm osx pip python emoji-clock heroku docker docker-compose emmoji)
+#plugins=(git virtualenvwrapper git-flow django fabric git-hubflow github celery npm osx pip python emoji-clock heroku docker docker-compose emmoji)
 
 export LANGUAGE=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export REACT_EDITOR=mvim
 
-source $ZSH/oh-my-zsh.sh
+#source $ZSH/oh-my-zsh.sh
 
 # Jump words
 bindkey "[D" backward-word

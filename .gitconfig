@@ -1,5 +1,5 @@
 [user]
-    email = eric@pokelondon.com
+    email = eric@madebymany.co.uk
     name = Eric George
 [color]
     ui = true
@@ -20,14 +20,9 @@
     log = true
 [core]
     editor = 'vim'
-	excludesfile = /Volumes/Data/Users/erigeorg/.gitignore_global
+	excludesfile = /Users/eric/.gitignore_global
 [push]
     default = simple
 [alias]
 	g = grep --break --heading --line-number
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+	up = pull --rebase --autostash
