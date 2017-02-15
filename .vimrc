@@ -31,7 +31,7 @@ Plugin 'goldfeld/vim-seek'
 
 " Syntaxes
 Plugin 'leshill/vim-json'
-Plugin 'skammer/vim-css-color'
+"Plugin 'skammer/vim-css-color'
 Plugin 'groenewege/vim-less'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'davidhalter/jedi-vim'
@@ -60,10 +60,7 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-endwise'
 
 " Colours
-Plugin 'chriskempson/base16-vim'
-Plugin 'mhartington/oceanic-next'
 Plugin 'joshdick/onedark.vim'
-Plugin 'jdkanani/vim-material-theme'
 
 " Stuff
 Plugin 'mgutz/vim-colors'
@@ -73,14 +70,12 @@ Plugin 'editorconfig/editorconfig-vim'
 Bundle 'wakatime/vim-wakatime'
 Plugin 'ctrlp.vim'
 Plugin 'Lokaltog/vim-easymotion'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'rizzatti/dash.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-let g:cssColorVimDoNotMessMyUpdatetime = 0
+"let g:cssColorVimDoNotMessMyUpdatetime = 0
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS

@@ -19,7 +19,7 @@
 [merge]
     log = true
 [core]
-    editor = 'vim'
+    editor = 'nvim'
 	excludesfile = /Users/eric/.gitignore_global
 [push]
     default = simple
