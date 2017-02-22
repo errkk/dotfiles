@@ -24,6 +24,7 @@ export LANGUAGE=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export REACT_EDITOR=mvim
+export EDITOR=nvim
 
 #source $ZSH/oh-my-zsh.sh
 
@@ -51,3 +52,5 @@ export NVM_DIR="/Users/eric/.nvm"
 eval "$(rbenv init -)"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
