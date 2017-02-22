@@ -105,6 +105,7 @@ endif
 "format javascript on save with prettier
 if executable('prettier')
   autocmd BufWritePre *.js call PrettierFormat()
+  autocmd BufWritePre *.jsx call PrettierFormat()
 endif
 
 "much of the following code is taken/repurposed from fatih/vim-go:
