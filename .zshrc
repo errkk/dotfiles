@@ -38,11 +38,16 @@ if [ -f $HOME/.export ] ; then source $HOME/.export ; fi
 # Lots of PATH
 export PATH=$PATH:/usr/local/git/bin:/usr/local/bin
 export PATH=$HOME/.node/bin:$PATH
+export PATH="$PATH:`yarn global bin`"
+
+# Android stuffs
+export ANDROID_HOME=${HOME}/Library/Android/sdk
+export PATH=${PATH}:${ANDROID_HOME}/tools
+export PATH=${PATH}:${ANDROID_HOME}/platform-tools
 
 # Python Path
 export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
 
-alias rs="django-admin.py runserver 0.0.0.0:9000"
 alias gst="git status"
 alias lg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias cpwd="pwd | tr -d '\n' | pbcopy"
@@ -54,3 +59,4 @@ eval "$(rbenv init -)"
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+

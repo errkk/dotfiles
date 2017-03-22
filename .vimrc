@@ -33,7 +33,6 @@ Plugin 'goldfeld/vim-seek'
 
 " Syntaxes
 Plugin 'leshill/vim-json'
-"Plugin 'skammer/vim-css-color'
 Plugin 'groenewege/vim-less'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'davidhalter/jedi-vim'
@@ -43,7 +42,7 @@ Plugin 'burnettk/vim-angular'
 Plugin 'sophacles/vim-processing'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
-Plugin 'flowtype/vim-flow'
+Plugin 'w0rp/ale'
 Plugin 'evanmiller/nginx-vim-syntax'
 Plugin 'elixir-lang/vim-elixir'
 
@@ -55,7 +54,7 @@ Plugin 'fs111/pydoc.vim'
 Plugin 'nvie/vim-flake8'
 Plugin 'atourino/jinja.vim'
 Plugin 'vim-scripts/python_match.vim'
-Plugin 'scrooloose/syntastic'
+"Plugin 'vim-syntastic/syntastic'
 
 " Ruby specific
 Plugin 'vim-ruby/vim-ruby'
@@ -70,7 +69,6 @@ Plugin 'bling/vim-airline'
 Plugin 'Gundo'
 Plugin 'editorconfig/editorconfig-vim'
 Bundle 'wakatime/vim-wakatime'
-"Plugin 'ctrlp.vim'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'Lokaltog/vim-easymotion'
@@ -104,11 +102,19 @@ if executable('ag')
     let g:agprg='ag -S --nocolor --nogroup --column --ignore "*/node_modules/*" --ignore "*/public/*"'
 endif
 
+":command WQ wq
+":command Wq wq
+":command W w
+":command Q q
+":command Qa qa
+":command QA qa
+
 
 """ Auto reformat JS
 "format javascript on save with prettier
 if executable('prettier')
-  autocmd BufWritePre *.js call PrettierFormat()
+  "autocmd BufWritePre *.js call PrettierFormat()
+  :command P call PrettierFormat()
 endif
 
 "much of the following code is taken/repurposed from fatih/vim-go:
@@ -323,7 +329,7 @@ autocmd BufWritePre *.scss :%s/\s\+$//e
 " General
 :nmap <C-n> :bnext<CR>
 :nmap ; :Buffers<CR>
-:nmap <C-o> :FZF<CR>
+:nmap <C-p> :GFiles<CR>
 
 " Change leader
 let mapleader = ","
@@ -350,15 +356,23 @@ let g:pep8_map= '+'
 let g:sparkupExecuteMapping = '<c-y>'
 let g:sparkupNextMapping = '<c-k>'
 
+
+" ALE
+let g:javascript_enable_domhtmlcss = 1
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_enter = 1
+let g:ale_sign_error = '👎'
+let g:ale_sign_warning = '😞'
+
 " Status Line
 set laststatus=2
-set statusline=%F%m%r%h%w\ (%{&ff}){%Y}\ [%l,%v][%p%%]
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_jump=0
-
-let g:javascript_enable_domhtmlcss = 1
-let g:syntastic_javascript_checkers = ['eslint']
-let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+set statusline+=%#warningmsg#
+set statusline+=%{ALEGetStatusLine()}
+set statusline+=%*
 
 
 " Show all open buffers
@@ -371,17 +385,6 @@ inoremap <leader>u <c-o>:GundoToggle<CR>
 " Vimrc stuff
 nmap <silent> <leader>ev :e $MYVIMRC
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
-
-" Flow Type
-let g:flow#autoclose = 1
-
-" Git shortcuts
-map <leader>gs :Gstatus<CR>
-map <leader>gw :Gwrite<CR>
-map <leader>gc :Gcommit<CR>
-map <leader>gb :Gblame<CR>
-map <leader>gd :Gdiff<CR>
-map <leader>ge :Gedit<CR>
 
 " NERDTree
 nnoremap <Leader>g :NERDTreeToggle<CR>
