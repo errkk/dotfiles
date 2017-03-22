@@ -1,83 +1,68 @@
 set encoding=utf-8
-set nocompatible              " be iMproved, required
-filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" Vundle help
-" " """""""""""
-" " :PluginList          - list configured bundles
-" " :PluginInstall(!)    - install(update) bundles
-" " :PluginSearch(!) foo - search(or refresh cache first) for foo
-" " :PluginClean(!)      - confirm(or auto-approve) removal of unused bundles
-
-" let Vundle manage Vundle
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
 " VCS
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 
 " System
-Plugin 'scrooloose/nerdtree'
-Plugin 'francoiscabrol/ranger.vim'
-Plugin 'rbgrouleff/bclose.vim'
-Plugin 'mileszs/ack.vim'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'tpope/vim-surround'
-Plugin 'Raimondi/delimitMate'
-Plugin 'corntrace/bufexplorer'
-Plugin 'goldfeld/vim-seek'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'francoiscabrol/ranger.vim'
+Plug 'rbgrouleff/bclose.vim'
+Plug 'mileszs/ack.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-surround'
+Plug 'Raimondi/delimitMate'
+Plug 'corntrace/bufexplorer'
+Plug 'goldfeld/vim-seek'
 
 " Syntaxes
-Plugin 'leshill/vim-json'
-Plugin 'groenewege/vim-less'
-Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'Shougo/neomru.vim'
-Plugin 'digitaltoad/vim-jade'
-Plugin 'burnettk/vim-angular'
-Plugin 'sophacles/vim-processing'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'w0rp/ale'
-Plugin 'evanmiller/nginx-vim-syntax'
-Plugin 'elixir-lang/vim-elixir'
+Plug 'leshill/vim-json'
+Plug 'groenewege/vim-less'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'davidhalter/jedi-vim'
+Plug 'digitaltoad/vim-jade'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'evanmiller/nginx-vim-syntax'
+Plug 'elixir-lang/vim-elixir'
+Plug 'w0rp/ale'
+Plug 'flowtype/vim-flow', { 'for': 'javascript' }
 
 " Auto Complete
-Plugin 'valloric/YouCompleteMe'
+Plug 'valloric/YouCompleteMe', { 'do': './install.py' }
 
 " Python bundles
-Plugin 'fs111/pydoc.vim'
-Plugin 'nvie/vim-flake8'
-Plugin 'atourino/jinja.vim'
-Plugin 'vim-scripts/python_match.vim'
-"Plugin 'vim-syntastic/syntastic'
+Plug 'nvie/vim-flake8'
+Plug 'atourino/jinja.vim'
+Plug 'vim-scripts/python_match.vim'
 
 " Ruby specific
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'tpope/vim-endwise'
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-endwise'
 
 " Colours
-Plugin 'joshdick/onedark.vim'
+Plug 'joshdick/onedark.vim'
 
 " Stuff
-Plugin 'mgutz/vim-colors'
-Plugin 'bling/vim-airline'
-Plugin 'Gundo'
-Plugin 'editorconfig/editorconfig-vim'
-Bundle 'wakatime/vim-wakatime'
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
-Plugin 'Lokaltog/vim-easymotion'
+Plug 'mgutz/vim-colors'
+Plug 'bling/vim-airline'
+Plug 'Gundo'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'wakatime/vim-wakatime'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()
+"filetype plugin indent on    " required
+filetype indent off
+syntax off
 
-"let g:cssColorVimDoNotMessMyUpdatetime = 0
+:command Wq wq
+:command W w
+:command Q q
+:command Qa qa
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -85,15 +70,15 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript,jsx setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-set completeopt=noselect,menuone,preview
+set completeopt=noselect,menuone
 set shortmess+=c
 
 let g:airline_powerline_fonts = 1
 
 if has('gui_running')
-    set guioptions=-t
-    let g:Powerline_symbols = 'fancy'
-    set guifont=Monaco\ for\ Powerline:h12
+  set guioptions=-t
+  let g:Powerline_symbols = 'fancy'
+  set guifont=Monaco\ for\ Powerline:h12
 endif
 
 " Use ag command for ack.vim
@@ -102,19 +87,15 @@ if executable('ag')
     let g:agprg='ag -S --nocolor --nogroup --column --ignore "*/node_modules/*" --ignore "*/public/*"'
 endif
 
-":command WQ wq
-":command Wq wq
-":command W w
-":command Q q
-":command Qa qa
-":command QA qa
-
+let g:flow#omnifunc = 1
+let g:flow#enable = 0
+let g:flow#autoclose = 1
 
 """ Auto reformat JS
 "format javascript on save with prettier
 if executable('prettier')
   "autocmd BufWritePre *.js call PrettierFormat()
-  :command P call PrettierFormat()
+  :command FormatJs call PrettierFormat()
 endif
 
 "much of the following code is taken/repurposed from fatih/vim-go:
@@ -252,10 +233,6 @@ vnoremap / /\v
 " Preserve indentation while pasting text from the OS X clipboard
 noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
 
-" :W should save as well
-"command W w
-"command Q q
-
 " Copy visual selection
 vmap <C-c> "*y
 
@@ -361,7 +338,7 @@ let g:sparkupNextMapping = '<c-k>'
 let g:javascript_enable_domhtmlcss = 1
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
-let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+let g:ale_sign_column_always = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
 let g:ale_lint_on_enter = 1
