@@ -31,6 +31,7 @@ Plug 'flowtype/vim-flow', { 'for': 'javascript' }
 
 " Auto Complete
 Plug 'valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'tpope/vim-repeat'
 
 " Python bundles
 Plug 'nvie/vim-flake8'
@@ -52,6 +53,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'wakatime/vim-wakatime'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'JamshedVesuna/vim-markdown-preview'
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -229,6 +231,9 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 """""""""""""""""""""""""""
 nnoremap / /\v
 vnoremap / /\v
+" Keep selection when indenting
+vnoremap < <gv
+vnoremap > >gv
 
 " Preserve indentation while pasting text from the OS X clipboard
 noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
@@ -355,7 +360,6 @@ set statusline+=%#warningmsg#
 set statusline+=%{ALEGetStatusLine()}
 set statusline+=%*
 
-
 " Show all open buffers
 noremap <leader>b :BufExplorer<return>
 
@@ -367,6 +371,9 @@ inoremap <leader>u <c-o>:GundoToggle<CR>
 nmap <silent> <leader>ev :e $MYVIMRC
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
+" Allow accidental capital q to quit
+noremap Q :quit<CR>
+
 " NERDTree
 nnoremap <Leader>g :NERDTreeToggle<CR>
 let NERDTreeIgnore = ['\.pyc$']
@@ -375,6 +382,9 @@ let NERDTreeIgnore = ['\.pyc$']
 "autocmd VimEnter * NERDTree
 let NERDTreeShowBookmarks=1
 let NERDTreeChDirMode=2
+
+" Jedi-vim override goto command that intergeres with NerdTree
+let g:jedi#goto_assignments_command = "<leader>K"
 
 " FZF Options
 """""""""""""
@@ -410,3 +420,13 @@ function! s:fzf_statusline()
 endfunction
 
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
+
+" Markdown Preview
+let vim_markdown_preview_github=1
+let vim_markdown_preview_hotkey='<C-m>'
+let vim_markdown_preview_browser='Google Chrome'
+
+" Manage line joins without messing up comment formatting
+if v:version > 703 || v:version == 703 && has('patch541')
+  set formatoptions+=j
+endif
