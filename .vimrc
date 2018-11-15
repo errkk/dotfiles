@@ -17,7 +17,8 @@ Plug 'corntrace/bufexplorer'
 Plug 'goldfeld/vim-seek'
 
 " Syntaxes
-Plug 'leshill/vim-json'
+Plug 'w0rp/ale'
+Plug 'elzr/vim-json'
 Plug 'groenewege/vim-less'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'davidhalter/jedi-vim'
@@ -26,21 +27,21 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'evanmiller/nginx-vim-syntax'
 Plug 'elixir-lang/vim-elixir'
-Plug 'w0rp/ale'
 Plug 'flowtype/vim-flow', { 'for': 'javascript' }
+Plug 'stephenway/postcss.vim'
+Plug 'styled-components/vim-styled-components'
+Plug 'vim-ruby/vim-ruby'
+Plug 'hashivim/vim-terraform'
 
 " Auto Complete
 Plug 'valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'tpope/vim-repeat'
+Plug 'juliosueiras/vim-terraform-completion'
 
 " Python bundles
-Plug 'nvie/vim-flake8'
 Plug 'atourino/jinja.vim'
 Plug 'vim-scripts/python_match.vim'
-
-" Ruby specific
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-endwise'
+Plug 'ambv/black'
 
 " Colours
 Plug 'joshdick/onedark.vim'
@@ -54,6 +55,10 @@ Plug 'wakatime/vim-wakatime'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'JamshedVesuna/vim-markdown-preview'
+Plug 'jceb/vim-orgmode'
+Plug 'tpope/vim-endwise'
+Plug 'mhinz/vim-mix-format'
+
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -92,6 +97,16 @@ endif
 let g:flow#omnifunc = 1
 let g:flow#enable = 0
 let g:flow#autoclose = 1
+let g:flow#showquickfix = 0
+
+function! StrTrim(txt)
+  return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+endfunction
+let g:flow_path = StrTrim(system('PATH=$(npm bin):$PATH && which flow'))
+
+" Mix format Elixir on save
+let g:mix_format_on_save = 0
+let g:mix_format_silent_errors = 1
 
 """ Auto reformat JS
 "format javascript on save with prettier
@@ -235,6 +250,9 @@ vnoremap / /\v
 vnoremap < <gv
 vnoremap > >gv
 
+" Dont replace register with thing thats being pasted over
+xnoremap P pgvy
+
 " Preserve indentation while pasting text from the OS X clipboard
 noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
 
@@ -273,25 +291,22 @@ autocmd FileType php setlocal colorcolumn=100
 " Python configurations
 """""""""""""""""""""""
 au BufNewFile,BufReadPost python setlocal shiftwidth=2 expandtab
-autocmd FileType python setlocal colorcolumn=80
+autocmd FileType python setlocal colorcolumn=88
 autocmd FileType python let g:pep8_map='<F4>'
-
-" Coffeescript configurations
-"""""""""""""""""""""""""""""
-au BufNewFile,BufReadPost *.coffee setlocal foldmethod=indent
-au BufNewFile,BufReadPost *.coffee setlocal shiftwidth=2 expandtab
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 " Javascript configurations
 """""""""""""""""""""""""""
-au BufNewFile,BufReadPost *.js setlocal shiftwidth=2 tabstop=2 expandtab
+autocmd BufNewFile,BufReadPost *.js setlocal shiftwidth=2 tabstop=2 expandtab
+autocmd BufNewFile,BufReadPost *.tf setlocal shiftwidth=2 tabstop=2 expandtab
 
 " Get jinja filetype selection working correctly for *.jinja.html files.
-au BufNewFile,BufReadPost *.html.jinja setlocal filetype=htmljinja
+autocmd BufNewFile,BufReadPost *.html.jinja setlocal filetype=htmljinja
 
 " Ardiuno filetypes
 """""""""""""""""""""""""""
-au BufRead,BufNewFile *.pde set filetype=arduino
-au BufRead,BufNewFile *.ino set filetype=arduino
+autocmd BufRead,BufNewFile *.pde set filetype=arduino
+autocmd BufRead,BufNewFile *.ino set filetype=arduino
 
 " Make sure we hilight extra whitespace in the most annoying way possible.
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -352,13 +367,19 @@ let g:ale_sign_warning = '😞'
 
 let g:ale_linters = {
 \  'scss': [],
+\  'javascript': ['flow', 'eslint']
 \}
 
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
 " Status Line
-set laststatus=2
-set statusline+=%#warningmsg#
-set statusline+=%{ALEGetStatusLine()}
-set statusline+=%*
+"set laststatus=2
+"set statusline+=%#warningmsg#
+"set statusline+=%{LinterStatus()}
+"set statusline+=%*
+
+let g:airline#extensions#ale#enabled=1
 
 " Show all open buffers
 noremap <leader>b :BufExplorer<return>
@@ -430,3 +451,13 @@ let vim_markdown_preview_browser='Google Chrome'
 if v:version > 703 || v:version == 703 && has('patch541')
   set formatoptions+=j
 endif
+
+let g:vim_json_syntax_conceal=0
+
+:set number relativenumber
+
+:augroup numbertoggle
+:  autocmd!
+:  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+:  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+:augroup END

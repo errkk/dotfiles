@@ -1,3 +1,5 @@
+export PURE_PROMPT_SYMBOL="✨ "
+
 source "$HOME/.slimzsh/slim.zsh"
 
 alias a='fasd -a'        # any
@@ -10,6 +12,15 @@ alias z='fasd_cd -d'     # cd, same functionality as j in autojump
 alias zz='fasd_cd -d -i' # cd with interactive selection
 
 alias be='bundle exec'
+alias ez='nvim ~/.zshrc'
+alias sz='source ~/.zshrc'
+alias sv='source venv/bin/activate'
+alias tf='terraform'
+alias kb='kubectl'
+alias dc='docker-compose'
+alias dce='docker-compose exec'
+alias gpu="git rev-parse --abbrev-ref HEAD | xargs git push -u origin" # push new branch to origin
+alias uncommit="git reset HEAD^"
 
 export LANGUAGE=en_US.UTF-8
 export LANG=en_US.UTF-8
