@@ -112,6 +112,7 @@ let g:mix_format_silent_errors = 1
 "format javascript on save with prettier
 if executable('prettier')
   "autocmd BufWritePre *.js call PrettierFormat()
+  "autocmd BufWritePre *.jsx call PrettierFormat()
   :command FormatJs call PrettierFormat()
 endif
 
