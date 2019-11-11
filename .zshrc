@@ -21,6 +21,11 @@ alias dc='docker-compose'
 alias dce='docker-compose exec'
 alias gpu="git rev-parse --abbrev-ref HEAD | xargs git push -u origin" # push new branch to origin
 alias uncommit="git reset HEAD^"
+alias gdmb='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
+alias pes='pipenv shell'
+commas () {
+  pbpaste | gsed '$!s/$/,/' | cat
+}
 
 export LANGUAGE=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -53,6 +58,7 @@ export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
 alias gst="git status"
 alias lg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias cpwd="pwd | tr -d '\n' | pbcopy"
+alias wevs='curl -s 'wttr.in/London?m1""
 
 # NVM
 export NVM_DIR="/Users/eric/.nvm"

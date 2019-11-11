@@ -7,7 +7,6 @@ Plug 'airblade/vim-gitgutter'
 
 " System
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'mileszs/ack.vim'
 Plug 'scrooloose/nerdcommenter'
@@ -368,7 +367,8 @@ let g:ale_sign_warning = '😞'
 
 let g:ale_linters = {
 \  'scss': [],
-\  'javascript': ['flow', 'eslint']
+\  'javascript': ['flow', 'eslint'],
+\  'python': ['flake8', 'pylint', 'mypy']
 \}
 
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
