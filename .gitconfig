@@ -20,9 +20,15 @@
     log = true
 [core]
     editor = 'nvim'
-	excludesfile = /Users/eric/.gitignore_global
+    excludesfile = /Users/ericgeorge/.gitignore_global
+    pager = delta --plus-color="#012800" --minus-color="#340001" --theme='TwoDark'
+	attributesfile = /Users/ericgeorge/.gitattributes
 [push]
     default = simple
 [alias]
 	g = grep --break --heading --line-number
 	up = pull --rebase --autostash
+[interactive]
+  diffFilter = delta --color-only --theme='TwoDark'
+[pull]
+	rebase = true

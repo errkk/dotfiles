@@ -4,6 +4,7 @@ call plug#begin('~/.vim/plugged')
 
 " VCS
 Plug 'airblade/vim-gitgutter'
+Plug 'zivyangll/git-blame.vim'
 
 " System
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -24,18 +25,26 @@ Plug 'davidhalter/jedi-vim'
 Plug 'digitaltoad/vim-jade'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
-Plug 'evanmiller/nginx-vim-syntax'
+Plug 'chr4/nginx.vim'
 Plug 'elixir-lang/vim-elixir'
 Plug 'flowtype/vim-flow', { 'for': 'javascript' }
 Plug 'stephenway/postcss.vim'
 Plug 'styled-components/vim-styled-components'
 Plug 'vim-ruby/vim-ruby'
+Plug 'noprompt/vim-yardoc'
+Plug 'skwp/vim-rspec'
 Plug 'hashivim/vim-terraform'
+Plug 'rhysd/conflict-marker.vim'
+Plug 'jceb/vim-orgmode'
+Plug 'leafgarland/typescript-vim'
+Plug 'jparize/vim-graphql'
+
 
 " Auto Complete
-Plug 'valloric/YouCompleteMe', { 'do': './install.py' }
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tpope/vim-repeat'
-Plug 'juliosueiras/vim-terraform-completion'
+Plug 'slashmili/alchemist.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Python bundles
 Plug 'atourino/jinja.vim'
@@ -43,12 +52,13 @@ Plug 'vim-scripts/python_match.vim'
 Plug 'ambv/black'
 
 " Colours
-Plug 'joshdick/onedark.vim'
+"Plug 'joshdick/onedark.vim'
+Plug 'arcticicestudio/nord-vim'
 
 " Stuff
 Plug 'mgutz/vim-colors'
 Plug 'bling/vim-airline'
-Plug 'Gundo'
+"Plug 'Gundo'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'wakatime/vim-wakatime'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -58,6 +68,8 @@ Plug 'jceb/vim-orgmode'
 Plug 'tpope/vim-endwise'
 Plug 'mhinz/vim-mix-format'
 
+" It's recommended to put this last
+Plug 'ryanoasis/vim-devicons'
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -80,6 +92,11 @@ set completeopt=noselect,menuone
 set shortmess+=c
 
 let g:airline_powerline_fonts = 1
+
+"let g:deoplete#enable_at_startup = 1
+
+"autocmd FileType tsx  let b:deoplete_disable_auto_complete = 1
+"autocmd FileType ts  let b:deoplete_disable_auto_complete = 1
 
 if has('gui_running')
   set guioptions=-t
@@ -192,9 +209,17 @@ au BufRead,BufNewFile *.html set filetype=html.html
 syntax enable
 let &t_Co=256
 set background=dark
-colorscheme onedark
-let g:airline_theme='onedark'
-let g:onedark_termcolors=16
+
+" Nord configs, before colorscheme
+let g:nord_italic = 1
+let g:nord_italic_comments = 1
+let g:nord_underline = 1
+let g:nord_cursor_line_number_background = 1
+let g:nord_bold_vertical_split_line = 1
+
+colorscheme nord
+"let g:airline_theme='onedark'
+"let g:onedark_termcolors=16
 
 set number        " always show line numbers
 set hidden        " Allow un-saved buffers in background
@@ -240,7 +265,16 @@ set foldlevel=99
 
 " Highlight VCS conflict markers
 """"""""""""""""""""""""""""""""
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+let g:conflict_marker_highlight_group = 'Error'
+
+" Include text after begin and end markers
+let g:conflict_marker_begin = '^<<<<<<< .*$'
+let g:conflict_marker_end   = '^>>>>>>> .*$'
+
+highlight ConflictMarkerBegin ctermbg=DarkGreen ctermfg=white cterm=bold
+highlight ConflictMarkerOurs ctermbg=LightGreen ctermfg=black
+highlight ConflictMarkerTheirs ctermbg=LightRed ctermfg=black
+highlight ConflictMarkerEnd ctermbg=DarkRed ctermfg=white cterm=bold
 
 " I CAN HAZ NORMAL REGEXES?
 """""""""""""""""""""""""""
@@ -283,6 +317,7 @@ autocmd FileType markdown setlocal wrap linebreak nolist
 " Ruby Configurations
 """""""""""""""""""""
 autocmd filetype ruby set shiftwidth=2 tabstop=2
+autocmd FileType ruby compiler ruby
 
 " PHP Configurations
 """"""""""""""""""""
@@ -331,6 +366,7 @@ autocmd BufWritePre *.scss :%s/\s\+$//e
 " Change leader
 let mapleader = ","
 let g:mapleader = ","
+let maplocalleader = "\\"
 
 " Vim Seek Keys
 let g:SeekKey = '<Space>'
@@ -371,8 +407,15 @@ let g:ale_linters = {
 \  'python': ['flake8', 'pylint', 'mypy']
 \}
 
+let g:ale_fixers = {
+\  'ruby': ['rufo']
+\}
+
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
+"
+" Bind F8 to fixing problems with ALE
+nmap <F8> <Plug>(ale_fix)
 
 " Status Line
 "set laststatus=2
@@ -381,6 +424,8 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 "set statusline+=%*
 
 let g:airline#extensions#ale#enabled=1
+
+nnoremap <Leader>s :<C-u>call gitblame#echo()<CR>
 
 " Show all open buffers
 noremap <leader>b :BufExplorer<return>
@@ -459,6 +504,6 @@ let g:vim_json_syntax_conceal=0
 
 :augroup numbertoggle
 :  autocmd!
-:  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-:  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+":  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+":  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 :augroup END

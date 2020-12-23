@@ -11,6 +11,8 @@ alias sf='fasd -sif'     # interactive file selection
 alias z='fasd_cd -d'     # cd, same functionality as j in autojump
 alias zz='fasd_cd -d -i' # cd with interactive selection
 
+alias ls='exa'
+
 alias be='bundle exec'
 alias ez='nvim ~/.zshrc'
 alias sz='source ~/.zshrc'
@@ -21,10 +23,27 @@ alias dc='docker-compose'
 alias dce='docker-compose exec'
 alias gpu="git rev-parse --abbrev-ref HEAD | xargs git push -u origin" # push new branch to origin
 alias uncommit="git reset HEAD^"
-alias gdmb='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
+alias gdmb='git branch --merged | egrep -v "(^\*|master|dev|develop|develop-group-leave)" | xargs git branch -d'
+alias gf='git fuzzy'
+alias gfs='git fuzzy status'
 alias pes='pipenv shell'
+alias ll='ls -alh -snew'
+
 commas () {
   pbpaste | gsed '$!s/$/,/' | cat
+}
+lamp () {
+  curl -s http://relays.local/cm?cmnd=Power1%20TOGGLE | jq '.POWER1' | sed -e 's/\"OFF\"/🙅/' -e 's/\"ON\"/💡/'
+}
+block () {
+  curl -s http://relays.local/cm?cmnd=Power3%20TOGGLE | jq '.POWER1' | sed -e 's/\"OFF\"/🙅/' -e 's/\"ON\"/💡/'
+}
+desk () {
+  curl -s http://desk.local/cm?cmnd=Power%20TOGGLE | jq '.POWER1' | sed -e 's/\"OFF\"/🙅/' -e 's/\"ON\"/💡/'
+}
+
+longlight () {
+  curl -s http://longlight.local/cm?cmnd=Power%20TOGGLE | jq '.POWER1' | sed -e 's/\"OFF\"/🙅/' -e 's/\"ON\"/💡/'
 }
 
 export LANGUAGE=en_US.UTF-8
@@ -64,10 +83,14 @@ alias wevs='curl -s 'wttr.in/London?m1""
 export NVM_DIR="/Users/eric/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
-# rbenv
-eval "$(rbenv init -)"
-
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+export PATH="/Users/ericgeorge/Development/checkouts/git-fuzzy/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+export PATH="$HOME/.rbenv/bin:$PATH"
+
+# rbenv
+eval "$(rbenv init -)"
