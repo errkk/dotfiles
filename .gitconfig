@@ -1,5 +1,5 @@
 [user]
-    email = eric@madebymany.co.uk
+    email = errkk@hey.com
     name = Eric George
 [color]
     ui = true
@@ -22,13 +22,13 @@
     editor = 'nvim'
     excludesfile = /Users/ericgeorge/.gitignore_global
     pager = delta --plus-color="#012800" --minus-color="#340001" --theme='TwoDark'
-	attributesfile = /Users/ericgeorge/.gitattributes
+    attributesfile = /Users/ericgeorge/.gitattributes
 [push]
     default = simple
 [alias]
-	g = grep --break --heading --line-number
-	up = pull --rebase --autostash
+    g = grep --break --heading --line-number
+    up = pull --rebase --autostash
 [interactive]
-  diffFilter = delta --color-only --theme='TwoDark'
+    diffFilter = delta --color-only --theme='TwoDark'
 [pull]
-	rebase = true
+    rebase = true

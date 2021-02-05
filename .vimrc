@@ -359,7 +359,6 @@ autocmd BufWritePre *.scss :%s/\s\+$//e
 " Custom mappings
 """"""""""""""""""
 " General
-:nmap <C-n> :bnext<CR>
 :nmap ; :Buffers<CR>
 :nmap <C-p> :GFiles<CR>
 
@@ -462,6 +461,9 @@ let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
 
+" Display in a window, instead of at the bottom
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
@@ -477,16 +479,6 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
-
-function! s:fzf_statusline()
-  " Override statusline as you like
-  highlight fzf1 ctermfg=161 ctermbg=251
-  highlight fzf2 ctermfg=23 ctermbg=251
-  highlight fzf3 ctermfg=237 ctermbg=251
-  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
-endfunction
-
-autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 " Markdown Preview
 let vim_markdown_preview_github=1
